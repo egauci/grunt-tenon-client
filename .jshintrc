@@ -1,0 +1,19 @@
+{
+  "undef": true,
+  "unused": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "plusplus": true,
+  "strict": true,
+  "maxparams": 5,
+  "maxdepth": 5,
+  "scripturl": true,
+  "browser": false,
+  "node": true,
+  "predef": ["Handlebars"]
+}
