@@ -1,4 +1,10 @@
 'use strict';
+
+/*
+ * This is a command line interface to the tenon module. It will handle one file or http URL
+ * at a time.
+ */
+
 var nom = require('nomnom'),
     tenon = require('./tenon'),
     opts,

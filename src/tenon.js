@@ -1,5 +1,12 @@
 'use strict';
 
+/*
+ * This module does the basic task.
+ * Given options and a reference to an html target, it will:
+ *   - if the reference is a local file, inline local scripts and css and hand it off to the tenon API
+ *   - if the reference is http, hand it off as is to the tenon API
+ */
+
 var fs = require('fs'),
     merge = require('merge'),
     request = require('request'),

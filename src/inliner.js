@@ -1,4 +1,11 @@
 'use strict';
+
+/*
+ * This is a simple inliner of LOCAL script and css tags. It will not handle http references.
+ * It gets a simple readFileSync, so conf.fname should exist.
+ * Doesn't (yet) handle CSS includes. Basically this is all one level deep and synchronous.
+ */
+
 var fs = require('fs'),
     path = require('path')
 ;
