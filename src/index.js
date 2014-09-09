@@ -90,7 +90,7 @@ opts = {
     type: 'string',
     help: 'systemID'
   },
-  usString: {
+  uaString: {
     full: 'uastring',
     type: 'string',
     help: 'uaString'
