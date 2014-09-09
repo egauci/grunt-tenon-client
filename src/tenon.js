@@ -5,6 +5,8 @@
  * Given options and a reference to an html target, it will:
  *   - if the reference is a local file, inline local scripts and css and hand it off to the tenon API
  *   - if the reference is http, hand it off as is to the tenon API
+ *
+ * This module uses sync filesystem functions, so it is not suitable for use in a server.
  */
 
 var fs = require('fs'),
@@ -26,28 +28,33 @@ var fs = require('fs'),
     }
 ;
 
+/*
+ * haveResults is currently the only async function in this module.
+ * It is bound to a context with two properties: callback and filter.
+ */
 function haveResults(err, response, body) {
-  var jsn, rs;
+  /*jshint -W040*/
+  var jsn, rs, self = this;
   if (err) {
-    callback(err);
+    this.callback(err);
     return;
   }
   try {
     jsn = JSON.parse(body);
   } catch(e) {
-    callback(e);
+    this.callback(e);
     return;
   }
   if (!jsn.status || jsn.status !== 200) {
     console.dir(jsn);
-    callback('Status: ' + (jsn.status ? String(jsn.status) : '555') + ' ' + (jsn.message ? jsn.message : ''));
+    this.callback('Status: ' + (jsn.status ? String(jsn.status) : '555') + ' ' + (jsn.message ? jsn.message : ''));
     return;
   }
   rs = jsn.resultSet.filter(function(itm) {
-    return filter.indexOf(itm.tID) === -1;
+    return self.filter.indexOf(itm.tID) === -1;
   });
   jsn.resultSetFiltered = rs;
-  callback(null, jsn, response);
+  this.callback(null, jsn, response);
 }
 
 function createForm() {
@@ -120,9 +127,7 @@ function haveConfig() {
       hdrs.proxy = process.env.HTTP_PROXY;
     }
 
-    //console.dir(hdrs);
-    //process.exit(1);
-    request(hdrs, haveResults);
+    request(hdrs, haveResults.bind({callback: callback, filter: filter}));
   }
 }
 
@@ -136,11 +141,12 @@ function proc(opts, cb) {
     }
   });
   res = merge(defaults, opts);
-  fs.readFile(res.config, function(err, dta) {
-    delete res.config;
-    config = err ? '{}' : dta;
-    haveConfig();
-  });
+  if (fs.existsSync(res.config)) {
+    config = fs.readFileSync(res.config);
+  } else {
+    config = '{}';
+  }
+  haveConfig();
 }
 
 module.exports = proc;

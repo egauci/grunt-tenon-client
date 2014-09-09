@@ -1,9 +1,9 @@
 {
-  "name": "tenonclient",
+  "name": "grunt-tenon",
   "version": "0.1.0",
   "description": "Tenon Client",
   "private": true,
-  "main": "index.js",
+  "main": "src/tenon.js",
   "dependencies": {
     "merge": "^1.1.3",
     "nomnom": "^1.8.0",

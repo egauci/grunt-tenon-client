@@ -1,10 +1,7 @@
 Tenon Tests
 ===========
 
-Nothing much to see at this point.
+This is an exploration of http://tenon.io/ - a web accessiblity API.
 
-This is an exploration of http://tenon.io/ - an accessiblity API.
+Tenon docs: https://bitbucket.org/tenon-io/tenon.io-documentation/
 
-The goal is a grunt plugin in the lint tradition.
-
-It will have to be post-build unfortunately.

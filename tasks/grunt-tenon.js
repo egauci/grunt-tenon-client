@@ -1,51 +1,59 @@
-/*
- * tenon
- * https://github.com/egauci/gruntp
- *
- * Copyright (c) 2014 Ed Gauci
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 module.exports = function(grunt) {
-
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('tenon', 'Grunt plugin for tenon', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var done = this.async(),
         options = this.options({
-          punctuation: '.',
-          separator: ', '
-        });
+          config: '.tenonrc'
+        }),
+        files = this.filesSrc,
+        tenon = require('../src/tenon'),
+        merge = require('merge'),
+        failed = 0,
+        procFile
+    ;
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
+    procFile = function() {
+      var file = files.shift(),
+          opts = merge(options)
+      ;
+      if (!file) {
+        if (failed > 0) {
+          grunt.log.writeln('\nFiles with errors: ' + failed + '\n');
+          done(false);
         } else {
-          return true;
+          done(true);
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+        return;
+      }
+      opts.url = file;
+      tenon(opts, function(err, res) {
+        grunt.log.write('\nFile: ' + file + ' ');
+        if (err) {
+          grunt.log.writeln('');
+          grunt.log.error(err);
+          done(false);
+          return;
+        }
+        if (res.resultSetFiltered.length > 0) {
+          failed += 1;
+          grunt.log.writeln('');
+          res.resultSetFiltered.forEach(function(itm) {
+            grunt.log.error('  tID:   ' + itm.tID);
+            grunt.log.writeln('  Title: ' + itm.errorTitle);
+            grunt.log.writeln('  Xpath: ' + itm.xpath);
+            grunt.verbose.writeln('    Snippit:');
+            grunt.verbose.writeln(itm.errorSnippet.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+          });
+        } else {
+          grunt.log.ok(' OK');
+        }
+        procFile();
+      });
+    };
 
-      // Handle options.
-      src += options.punctuation;
-
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
-
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
+    procFile();
   });
-
 };
