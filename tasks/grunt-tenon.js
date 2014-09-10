@@ -12,15 +12,16 @@ module.exports = function(grunt) {
         tenon = require('../src/tenon'),
         merge = require('merge'),
         failed = 0,
+        snippet = options.snippet,
         procFile
     ;
 
+    delete options.snippet;
+
     procFile = function() {
       var file = files.shift(),
-          snippet = options.snippet,
           opts
       ;
-      delete options.snippet;
       opts = merge(options);
       if (!file) {
         if (failed > 0) {
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
             grunt.log.writeln('  Title: ' + itm.errorTitle);
             grunt.log.writeln('  Xpath: ' + itm.xpath);
             if (snippet) {
-              grunt.log.writeln('    Snippit:');
+              grunt.log.writeln('  Snippit:');
               grunt.log.writeln(itm.errorSnippet.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
             }
           });
