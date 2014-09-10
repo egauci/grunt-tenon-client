@@ -13,10 +13,13 @@ module.exports = function(grunt) {
         merge = require('merge'),
         failed = 0,
         snippet = options.snippet,
+        writePath = options.saveOutputIn,
+        allOut = {},
         procFile
     ;
 
     delete options.snippet;
+    delete options.saveOutputIn;
 
     procFile = function() {
       var file = files.shift(),
@@ -24,6 +27,9 @@ module.exports = function(grunt) {
       ;
       opts = merge(options);
       if (!file) {
+        if (writePath && Object.keys(allOut).length > 0) {
+          grunt.file.write(writePath, JSON.stringify(allOut, null, '  '));
+        }
         if (failed > 0) {
           grunt.log.writeln('\nFiles with errors: ' + failed + '\n');
           done(false);
@@ -41,6 +47,9 @@ module.exports = function(grunt) {
           done(false);
           return;
         }
+        if (writePath) {
+          allOut[file] = res;
+        }
         if (res.resultSetFiltered.length > 0) {
           failed += 1;
           grunt.log.writeln('');
@@ -56,7 +65,7 @@ module.exports = function(grunt) {
         } else {
           grunt.log.ok(' OK');
         }
-        procFile();
+        process.nextTick(procFile);
       });
     };
 
