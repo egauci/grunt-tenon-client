@@ -8,14 +8,16 @@ Tenon docs: https://bitbucket.org/tenon-io/tenon.io-documentation/
 What's Here
 -----------
 
-The src folder contains node modules.
+The lib folder contains node modules.
 
 1. tenon.js is the main module that interacts with the Tenon API.
 2. inliner.js inlines LOCAL Javascript and CSS into the document
-3. index.js is a CLI front-end to tenon.js. It is not used for the Grunt task.
+
+The src folder contains *index.js*, a CLI front-end to tenon.js.
+It is not used for the Grunt task.
 Type "node src/index --help" for instructions.
 
-The tasks folder contains the grunt plugin.
+The tasks folder contains a grunt plugin.
 
 Things to Note
 --------------
@@ -24,7 +26,7 @@ Tenon.js receives a configuration object. This object can contain properties cor
 all the options documented in the Tenon API documentation. In addition, it can also contain the
 following properties:
 
-- config -- Path to a file with parameters to merge in. Default for this in both
+- config -- Path to a JSON file with parameters to merge in. Default for this in both
 index.js and the Grunt task is '.tenonrc' in the current working directory. This file would be
 a convenient place to put the API URL and the API key.
 - userid and password -- Presence of these means the document must be an HTTP url (the code

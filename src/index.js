@@ -6,7 +6,7 @@
  */
 
 var nom = require('nomnom'),
-    tenon = require('./tenon'),
+    tenon = require('../lib/tenon'),
     opts,
     res
     ;

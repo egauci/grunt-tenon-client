@@ -9,7 +9,7 @@ module.exports = function(grunt) {
           config: '.tenonrc'
         }),
         files = this.filesSrc,
-        tenon = require('../src/tenon'),
+        tenon = require('../lib/tenon'),
         merge = require('merge'),
         failed = 0,
         snippet = options.snippet,
