@@ -15,11 +15,13 @@ module.exports = function(grunt) {
         merge = require('merge'),
         failed = 0,
         sent = 0,
-        snippet,
+        snippet = options.snippet,
+        writePath = options.saveOutputIn,
+        allOut = {},
         tenonResult
     ;
 
-    tenonResult = function(err, res) {
+    tenonResult = function(err, res, orgUrl) {
       sent -= 1;
       if (err) {
         grunt.log.writeln('');
@@ -27,7 +29,8 @@ module.exports = function(grunt) {
         done(false);
         return;
       }
-      console.log('For: ' + res.orgUrl + ', sent: ' + sent);
+      grunt.log.write('File: ' + orgUrl + ', sent: ' + sent + ' ');
+
       if (res.resultSetFiltered.length > 0) {
         failed += 1;
         grunt.log.writeln('');
@@ -43,7 +46,16 @@ module.exports = function(grunt) {
       } else {
         grunt.log.ok(' OK');
       }
+
+      if (writePath) {
+        delete res.resultSetFiltered;
+        allOut[orgUrl] = res;
+      }
+
       if (sent <= 0) {
+        if (writePath && Object.keys(allOut).length > 0) {
+          grunt.file.write(writePath, JSON.stringify(allOut, null, '  '));
+        }
         if (failed > 0) {
           grunt.log.error('Files with errors: ' + failed);
           done(false);

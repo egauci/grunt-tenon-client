@@ -47,9 +47,6 @@ module.exports = function(grunt) {
           done(false);
           return;
         }
-        if (writePath) {
-          allOut[file] = res;
-        }
         if (res.resultSetFiltered.length > 0) {
           failed += 1;
           grunt.log.writeln('');
@@ -64,6 +61,10 @@ module.exports = function(grunt) {
           });
         } else {
           grunt.log.ok(' OK');
+        }
+        if (writePath) {
+          delete res.resultSetFiltered;
+          allOut[file] = res;
         }
         process.nextTick(procFile);
       });
