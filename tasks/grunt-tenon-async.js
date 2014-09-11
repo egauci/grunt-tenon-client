@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         done(false);
         return;
       }
-      grunt.log.write('File: ' + orgUrl + ', sent: ' + sent + ' ');
+      grunt.log.write('\nFile: ' + orgUrl + ', sent: ' + sent + ' ');
 
       if (res.resultSetFiltered.length > 0) {
         failed += 1;
