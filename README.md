@@ -33,7 +33,7 @@ doesn't check, but it probably should) and these will be used for basic auth (us
 new array, resultSetFiltered, with these particular errors filtered out.
 
 If tenon.js determines that the given URL is a local file (it doesn't start with "http" and userid and
-assword are not provided in the configuration) it will inline all local Javascript and CSS. For example:
+password are not provided in the configuration) it will inline all local Javascript and CSS. For example:
 
   &lt;link rel="stylesheet" href="css/combo.css" media="screen"&gt;
 

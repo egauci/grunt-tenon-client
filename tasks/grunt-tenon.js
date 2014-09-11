@@ -26,7 +26,7 @@ module.exports = function(grunt) {
           opts
       ;
       opts = merge(options);
-      if (!file) {
+      if (!file) { // no more files, done.
         if (writePath && Object.keys(allOut).length > 0) {
           grunt.file.write(writePath, JSON.stringify(allOut, null, '  '));
         }
