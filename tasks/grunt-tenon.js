@@ -58,6 +58,7 @@ module.exports = function(grunt) {
           grunt.log.writeln('');
           res.resultSetFiltered.forEach(function(itm) {
             grunt.log.error(' tID:   ' + itm.tID);
+            grunt.log.writeln('   bpID:  ' + itm.bpID);
             grunt.log.writeln('   Title: ' + itm.errorTitle);
             grunt.log.writeln('   Xpath: ' + itm.xpath);
             if (snippet) {
