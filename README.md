@@ -22,7 +22,8 @@ The tasks folder contains a grunt plugin.
 Things to Note
 --------------
 
-Tenon.js receives a configuration object. This object can contain properties corresponding to
+The tenon module (in tenon.js)
+receives a configuration object. This object can contain properties corresponding to
 all the options documented in the Tenon API documentation. In addition, it can also contain the
 following properties:
 
@@ -46,3 +47,16 @@ will be converted to:
   &lt;/style&gt;
 
 Javascript and CSS references that start with "http" are not touched.
+
+The basic assumption is that files loaded with HTTP are accessible to the Tenon server, but
+local files are not.
+
+The Grunt Plugin
+----------------
+
+The Grunt plugin is a standard Grunt MultiTask. It can be configured in the normal multitask
+way. In addition to the options described above, there are these specific to the plugin:
+
+- snippet -- true or false (default false) to include errorSnippet in the console output.
+- saveOutputIn -- an (optional) path to a file that will receive all the results from the Tenon API. Default is no file output.
+
