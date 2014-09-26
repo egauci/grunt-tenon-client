@@ -4,21 +4,25 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('tenon', 'Grunt plugin for tenon', function() {
     var clone = require('clone'),
+        async = require('async'),
         chalk = require('chalk'),
         tenon = require('../lib/tenon'),
         done = this.async(),
         options = this.options({
-          config: '.tenonrc'
+          config: '.tenonrc',
+          asyncLim: 1
         }),
         files = this.filesSrc,
         failed = 0,
         snippet = options.snippet,
         writePath = options.saveOutputIn,
+        asyncLim = options.asyncLim,
         allOut = {}
     ;
 
     delete options.snippet; // remove grunt task options before passing to tenon module
     delete options.saveOutputIn;
+    delete options.asyncLim;
 
     function fmtFilename(file) {
       var lix = file.lastIndexOf('/');
@@ -28,28 +32,27 @@ module.exports = function(grunt) {
       return file.slice(0, lix+1) + chalk.bold(file.slice(lix+1));
     }
 
-    function procFile() { // process one html file
-      var file = files.shift(),
-          opts
-      ;
-      if (!file) { // no more files, done.
-        if (writePath && Object.keys(allOut).length > 0) {
-          grunt.file.write(writePath, JSON.stringify(allOut, null, '  '));
-        }
-        if (failed) {
-          grunt.log.writeln(chalk.yellow('\nFiles with errors: ' + failed + '\n'));
-          done(false);
-        } else {
-          done(true);
-        }
-        return;
+    function allDone(err) {
+      if (writePath && Object.keys(allOut).length > 0) {
+        grunt.file.write(writePath, JSON.stringify(allOut, null, '  '));
       }
-      opts = clone(options, false);
+      if (failed || err) {
+        grunt.log.writeln(chalk.yellow('\nFiles with errors: ' + failed + '\n'));
+        done(false);
+      } else {
+        done(true);
+      }
+
+    }
+
+    function procFile(file, callback) { // process one html file
+      var opts = clone(options, false);
+
       opts.url = file;
       tenon(opts, function(err, res) {
         if (err) {
-          grunt.log.error('Tenon error: ' + err);
-          done(false);
+          grunt.log.error(chalk.red.bgWhite('Tenon error:') + ' ' + err.slice(0,500));
+          callback(err);
           return;
         }
         grunt.log.write('\n' + fmtFilename(file) + ' ');
@@ -73,10 +76,10 @@ module.exports = function(grunt) {
           delete res.resultSetFiltered;
           allOut[file] = res;
         }
-        process.nextTick(procFile);
+        callback();
       });
     }
 
-    procFile();
+    async.eachLimit(files, asyncLim, procFile, allDone);
   });
 };

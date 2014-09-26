@@ -1,7 +1,8 @@
 Tenon Tests
 ===========
 
-This is an exploration of http://tenon.io/ - a web accessiblity API.
+This is an exploration of http://tenon.io/ - a web accessiblity API in
+the form of a Grunt plugin.
 
 Tenon docs: https://bitbucket.org/tenon-io/tenon.io-documentation/
 
@@ -10,14 +11,14 @@ What's Here
 
 The lib folder contains node modules.
 
-1. tenon.js is the main module that interacts with the Tenon API.
-2. inliner.js inlines LOCAL Javascript and CSS into the document
+1. *tenon.js* is the interface for the Tenon API.
+2. *inliner.js* inlines LOCAL Javascript and CSS into the document
 
 The src folder contains *index.js*, a CLI front-end to tenon.js.
-It is not used for the Grunt task.
+It is not used for the Grunt plugin.
 Type "node src/index --help" for instructions.
 
-The tasks folder contains a grunt plugin.
+The Grunt plugin is in the tasks folder, named *grunt-tenon.js*.
 
 Things to Note
 --------------
@@ -51,6 +52,9 @@ Javascript and CSS references that start with "http" are not touched.
 The basic assumption is that files loaded with HTTP are accessible to the Tenon server, but
 local files are not.
 
+The modules in the lib folder are fully async and would be usable in a server that has to support
+multiple connections.
+
 The Grunt Plugin
 ----------------
 
@@ -59,4 +63,7 @@ way. In addition to the options described above, there are these specific to the
 
 - snippet -- true or false (default false) to include errorSnippet in the console output.
 - saveOutputIn -- an (optional) path to a file that will receive all the results from the Tenon API. Default is no file output.
+- asyncLim -- the maximum number of files to test in parallel. Default is 1. Setting this to a higher
+value seems to cause "status: 500" results intermittently. This may be an issue with the still beta Tenon API.
+
 
