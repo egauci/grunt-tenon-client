@@ -40,8 +40,8 @@ new array, resultSetFiltered, with these particular errors filtered out.
 The only Tenon API property that cannot be passed is *src*. The module requires the url property
 and will populate src if it points to a local file.
 
-If tenon.js determines that the given url is a local file (it doesn't start with "http" and userid and
-password are not provided in the configuration) it will inline all local Javascript and CSS. For example:
+If tenon.js determines that the given url is a local file (it doesn't start with "http") it will inline all
+local Javascript and CSS. For example:
 
     <link rel="stylesheet" href="css/combo.css" media="screen">
 
@@ -51,7 +51,12 @@ will be converted to:
       [[content of css/combo.css]]
     </style>
 
-Javascript and CSS references that start with "http" are not touched.
+The inlined files must be relative to the HTML file. For example, if a javascript src attribute
+in an html file at C:\project\index.html is "js/script.js" then the file should be at
+C:\project\js\script.js.
+
+Javascript and CSS references that start with "http" are not touched. Userid/password are ignored
+for local files.
 
 The basic assumption is that files loaded with HTTP are accessible to the Tenon server, but
 local files are not.
