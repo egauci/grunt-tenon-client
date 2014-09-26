@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
 
   grunt.registerMultiTask('tenon', 'Grunt plugin for tenon', function() {
-    var merge = require('merge'),
+    var clone = require('clone'),
         chalk = require('chalk'),
         tenon = require('../lib/tenon'),
         done = this.async(),
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         }
         return;
       }
-      opts = merge(options);
+      opts = clone(options, false);
       opts.url = file;
       tenon(opts, function(err, res) {
         if (err) {
