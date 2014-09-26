@@ -1,7 +1,7 @@
 Tenon Tests
 ===========
 
-This is an exploration of http://tenon.io/ - a web accessiblity API in
+This is an exploration of [TENON](http://tenon.io/) - a web accessiblity testing API - in
 the form of a Grunt plugin.
 
 Tenon docs: https://bitbucket.org/tenon-io/tenon.io-documentation/
@@ -25,27 +25,31 @@ Things to Note
 
 The tenon module (in tenon.js)
 receives a configuration object. This object can contain properties corresponding to
-all the options documented in the Tenon API documentation. In addition, it can also contain the
+all the options documented in the Tenon API documentation (with one exception, see below).
+In addition, it can also contain the
 following properties:
 
 - config -- Path to a JSON file with parameters to merge in. Default for this in both
 index.js and the Grunt task is '.tenonrc' in the current working directory. This file would be
 a convenient place to put the API URL and the API key.
-- userid and password -- Presence of these means the document must be an HTTP url (the code
-doesn't check, but it probably should) and these will be used for basic auth (userid:password@domain.com/...)
+- userid and password -- if both are present and the url starts with http, then these
+are incorporated into the url passed to Tenon for basic auth: (use<span>rid:</span>password@domain.com/...)
 - filter - an array of tIDs to filter out of the results. Actually it leaves resultSet unmolested, but creates a
 new array, resultSetFiltered, with these particular errors filtered out.
 
-If tenon.js determines that the given URL is a local file (it doesn't start with "http" and userid and
+The only Tenon API property that cannot be passed is *src*. The module requires the url property
+and will populate src if it points to a local file.
+
+If tenon.js determines that the given url is a local file (it doesn't start with "http" and userid and
 password are not provided in the configuration) it will inline all local Javascript and CSS. For example:
 
-  &lt;link rel="stylesheet" href="css/combo.css" media="screen"&gt;
+    <link rel="stylesheet" href="css/combo.css" media="screen">
 
 will be converted to:
 
-  &lt;style media="screen"&gt;
-    [[content of css/combo.css]]
-  &lt;/style&gt;
+    <style media="screen">
+      [[content of css/combo.css]]
+    </style>
 
 Javascript and CSS references that start with "http" are not touched.
 
@@ -66,4 +70,5 @@ way. In addition to the options described above, there are these specific to the
 - asyncLim -- the maximum number of files to test in parallel. Default is 1. Setting this to a higher
 value seems to cause "status: 500" results intermittently. This may be an issue with the still beta Tenon API.
 
-
+At this time the Grunt plugin only passes local files to Tenon (the url is always a local file). It's easy
+to envision a scenario where this is not desired, but it is a current limitation.
