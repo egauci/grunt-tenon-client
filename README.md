@@ -77,3 +77,28 @@ value seems to cause "status: 500" results intermittently. This may be an issue 
 
 At this time the Grunt plugin only passes local files to Tenon (the url is always a local file). It's easy
 to envision a scenario where this is not desired, but it is a current limitation.
+
+Here is a sample Gruntfile.js configuration:
+
+    tenon: {
+      options: {
+        filter: [31]
+      },
+      all: {
+        options: {
+          saveOutputIn: 'allHtml.json',
+          snippet: true
+        },
+        src: [
+          'dev/build/*html'
+        ]
+      },
+      index: {
+        src: [
+          'dev/build/index.html'
+        ]
+      }
+    }
+
+The above defines two subtasks, *all* and *index*. The filter option is global and applies to both. The *all* subtask
+has additional options, not shared with other subtasks.
