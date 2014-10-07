@@ -1,7 +1,7 @@
 {
   "name": "grunt-tenon",
   "version": "0.2.1",
-  "description": "Grunt Plugin for Tenon Accessibility Testing API",
+  "description": "Grunt (and gulp) Plugin for Tenon Accessibility Testing API",
   "private": true,
   "main": "src/tenon.js",
   "dependencies": {
@@ -9,12 +9,15 @@
     "bluebird": "^2.3.2",
     "chalk": "^0.5.1",
     "clone": "^0.1.18",
+    "gulp-util": "^3.0.1",
     "merge": "^1.1.3",
     "nomnom": "^1.8.0",
-    "request": "^2.40.0"
+    "request": "^2.40.0",
+    "through2": "^0.6.2"
   },
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "gulp": "^3.8.8"
   },
   "peerDependencies": {
     "grunt": "^0.4.5"

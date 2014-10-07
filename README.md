@@ -2,7 +2,7 @@ Tenon Tests
 ===========
 
 This is an exploration of [TENON](http://tenon.io/) - a web accessiblity testing API - in
-the form of a Grunt plugin.
+the form of a Grunt plugin (also a gulp plugin).
 
 Tenon docs: https://bitbucket.org/tenon-io/tenon.io-documentation/
 
@@ -19,6 +19,8 @@ It is not used for the Grunt plugin.
 Type "node src/index --help" for instructions.
 
 The Grunt plugin is in the tasks folder, named *grunt-tenon.js*.
+
+The gulp plugin is in the root folder, named *gulp-tenon.js*.
 
 Things to Note
 --------------
@@ -102,3 +104,27 @@ Here is a sample Gruntfile.js configuration:
 
 The above defines two subtasks, *all* and *index*. The filter option is global and applies to both. The *all* subtask
 has additional options, not shared with other subtasks.
+
+The Gulp Plugin
+---------------
+
+I'm not a gulp user, at least not yet, and this is probably not a very good first attempt at a plugin.
+Any feedback would be much appreciated.
+
+The plugin can handle the same options as the Grunt plugin except asyncLim. I didn't come up with a reasonable
+way to implement that with gulp. The gulp plugin always processes one HTML file at a time.
+
+Here is a sample gulp task:
+
+    var gulp = require('gulp'),
+        gtenon = require('gulp-tenon')
+    ;
+
+    gulp.task('default', function() {
+      gulp.src('dev/build/*html', {read: false})
+      .pipe(gtenon({
+        snippet: true,
+        filter: [31],
+        saveOutputIn: 'allHtml.json'
+      }));
+    });
