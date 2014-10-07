@@ -26,7 +26,7 @@ module.exports = function(opts) {
     var fp = file.path,
         lix;
     if (file.cwd && fp.indexOf(file.cwd) === 0) {
-      fp = fp.slice(file.cwd.length);
+      fp = fp.slice(file.cwd.length + 1);
     }
     fp = fp.replace(/\\/g, '/');
     lix = fp.lastIndexOf('/');
@@ -58,7 +58,7 @@ module.exports = function(opts) {
             }
           });
         } else {
-          console.log('\n' + fname + chalk.green('  OK'));
+          console.log('\n' + fname + chalk.green(' >> OK'));
         }
         if (writePath) {
           delete data.resultSetFiltered;
