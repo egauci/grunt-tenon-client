@@ -1,6 +1,6 @@
 {
   "name": "grunt-tenon",
-  "version": "0.2.1",
+  "version": "0.4.0",
   "description": "Grunt (and gulp) Plugin for Tenon Accessibility Testing API",
   "main": "src/tenon.js",
   "dependencies": {

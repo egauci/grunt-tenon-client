@@ -1,3 +1,9 @@
 h1 {
   color: orange;
+  background: url(../images/t1.jpg);
+}
+
+h2 {
+  color: pink;
+  background: url("../../images/t2.jpg") no-repeat;
 }
