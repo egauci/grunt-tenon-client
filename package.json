@@ -20,14 +20,5 @@
   },
   "peerDependencies": {
     "grunt": "^0.4.5"
-  },
-  "license": "isc",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/egauci/grunt-tenon.git"
-  },
-  "author": {
-    "name": "Ed Gauci",
-    "email": "ed@gauci.co"
   }
 }
