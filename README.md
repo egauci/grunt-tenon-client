@@ -1,13 +1,13 @@
-Tenon Tests
-===========
+Tenon Web Accessibility Testing Grunt Plugin
+============================================
 
 This is a Grunt plugin for [TENON](http://tenon.io/) - a web accessiblity testing API.
 
 Tenon docs: http://tenon.io/documentation/
 
-This Grunt Tenon plugin is open and free. However, access to the Tenon API must
-be granted by [Tenon](http://tenon.io/). You will need to obtain an API key to
-use it.
+This Grunt Tenon plugin is [open and free](https://github.com/egauci/grunt-tenon-client/blob/master/LICENSE)
+However, access to the Tenon API must be granted by [Tenon](http://tenon.io/).
+You will need to obtain an API key to use it.
 
 A similar gulp plugin that was part of this project has been moved to its own
 repository: https://github.com/egauci/gulp-tenon-client.
@@ -44,10 +44,9 @@ In addition to the API and client module options, there are these specific to th
 - snippet -- true or false (default false) to include errorSnippet in the console output.
 - saveOutputIn -- an (optional) path to a file that will receive all the results from the Tenon API. Default is no file output.
 - asyncLim -- the maximum number of files to test in parallel. Default is 1.
-- config -- path to a JSON file containing options. Default is '.tenonrc' in the current working directory. This may be
-a good place to put your API key.
-
-At this time the Grunt plugin only passes local files to Tenon (the url is always a local file).
+- config -- path to a JSON file containing options. Default is '.tenonrc' in the current working directory.
+The file is processed by the API module and can contain API and API Module parameters.
+This may be a good place to put your API key.
 
 Here is a sample Gruntfile.js configuration:
 
@@ -74,5 +73,5 @@ Here is a sample Gruntfile.js configuration:
       }
     }
 
-The above defines two subtasks, *all* and *index*. The filter and level options are global and apply to both.
+The above defines two subtasks, *all* and *index*. The key, filter and level options are global and apply to both.
 The *all* subtask has additional options not shared with the other subtask.
