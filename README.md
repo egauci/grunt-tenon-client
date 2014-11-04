@@ -1,8 +1,7 @@
 Tenon Tests
 ===========
 
-This is an exploration of [TENON](http://tenon.io/) - a web accessiblity testing API - in
-the form of a Grunt plugin.
+This is a Grunt plugin for [TENON](http://tenon.io/) - a web accessiblity testing API.
 
 Tenon docs: http://tenon.io/documentation/
 
@@ -41,12 +40,14 @@ Here is a sample Gruntfile.js configuration:
 
     tenon: {
       options: {
-        filter: [31]
+        filter: [31],
+        level: 'AAA'
       },
       all: {
         options: {
           saveOutputIn: 'allHtml.json',
-          snippet: true
+          snippet: true,
+          asyncLin: 2
         },
         src: [
           'dev/build/*html'
