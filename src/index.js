@@ -6,7 +6,7 @@
  */
 
 var nom = require('nomnom'),
-    tenon = require('../lib/tenon'),
+    tenon = require('tenon-api-client'),
     opts,
     res
     ;

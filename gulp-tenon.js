@@ -5,7 +5,7 @@ var clone = require('clone'),
     merge = require('merge'),
     chalk = require('chalk'),
     fs = require('fs'),
-    tenon = require('./lib/tenon')
+    tenon = require('tenon-api-client')
 ;
 
 var PLUGIN_NAME = 'gulp-tenon';

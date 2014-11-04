@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     var clone = require('clone'),
         async = require('async'),
         chalk = require('chalk'),
-        tenon = require('../lib/tenon'),
+        tenon = require('tenon-api-client'),
         done = this.async(),
         options = this.options({
           config: '.tenonrc',
