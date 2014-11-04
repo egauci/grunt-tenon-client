@@ -5,7 +5,7 @@ This is a Grunt plugin for [TENON](http://tenon.io/) - a web accessiblity testin
 
 Tenon docs: http://tenon.io/documentation/
 
-This Grunt Tenon plugin is [open and free](https://github.com/egauci/grunt-tenon-client/blob/master/LICENSE)
+This Grunt Tenon plugin is [open and free](https://github.com/egauci/grunt-tenon-client/blob/master/LICENSE).
 However, access to the Tenon API must be granted by [Tenon](http://tenon.io/).
 You will need to obtain an API key to use it.
 
