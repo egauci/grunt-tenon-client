@@ -75,3 +75,23 @@ Here is a sample Gruntfile.js configuration:
 
 The above defines two subtasks, *all* and *index*. The key, filter and level options are global and apply to both.
 The *all* subtask has additional options not shared with the other subtask.
+
+
+Note on using http(s) URLs:
+---------------------------
+
+My use case for making this Grunt plugin is to use Tenon during builds on servers that are not accessible to Tenon.
+It passes the HTML file content, with inlined local Javascript and CSS to Tenon. However, it is possible to pass
+server URLs to Tenon instead of source by using the "urlPrefix" option provided by
+[tenon-api-client](https://github.com/egauci/tenon-api-client). For example, if your target file is
+*build/index.html* and it can be addressed as *http://my.domain.com/foo/build.index.html* then you can
+use the option *urlPrefix: 'http://my.domain.com/foo/'*.
+
+Remember, for this to work *http://my.domain.com/foo/build/index.html* must be accessible to the Tenon server.
+
+This option is applied to each target file.
+
+Changelog
+---------
+
+  0.6.2 - Documented use of urlPrefix. No code changes.
