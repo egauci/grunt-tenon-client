@@ -84,7 +84,7 @@ My use case for making this Grunt plugin is to use Tenon during builds on server
 It passes the HTML file content, with inlined local Javascript and CSS to Tenon. However, it is possible to pass
 server URLs to Tenon instead of source by using the "urlPrefix" option provided by
 [tenon-api-client](https://github.com/egauci/tenon-api-client). For example, if your target file is
-*build/index.html* and it can be addressed as *http://my.domain.com/foo/build.index.html* then you can
+*build/index.html* and it can be addressed as *http://my.domain.com/foo/build/index.html* then you can
 use the option *urlPrefix: 'http://my.domain.com/foo/'*.
 
 Remember, for this to work *http://my.domain.com/foo/build/index.html* must be accessible to the Tenon server.
