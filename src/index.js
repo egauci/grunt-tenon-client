@@ -85,10 +85,10 @@ opts = {
     type: 'boolean',
     help: 'Set to true to store results at tenon.io'
   },
-  systemID: {
-    full: 'systemid',
+  projectID: {
+    full: 'projectID',
     type: 'string',
-    help: 'systemID'
+    help: 'projectID'
   },
   uaString: {
     full: 'uastring',

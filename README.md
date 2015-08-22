@@ -94,4 +94,5 @@ This option is applied to each target file.
 Changelog
 ---------
 
+  0.7.0 - updated tenon-api-client and the manual run in src/index.js
   0.6.2 - Documented use of urlPrefix. No code changes.
