@@ -55,7 +55,8 @@ Here is a sample Gruntfile.js configuration:
       options: {
         key: 'your Tenon API key',
         filter: [31, 54],
-        level: 'AAA'
+        level: 'AAA',
+        force:false
       },
       all: {
         options: {
