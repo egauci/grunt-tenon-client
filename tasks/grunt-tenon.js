@@ -10,19 +10,22 @@ module.exports = function(grunt) {
         done = this.async(),
         options = this.options({
           config: '.tenonrc',
-          asyncLim: 1
+          asyncLim: 1,
+          force: false
         }),
         files = this.filesSrc,
         failed = 0,
         snippet = options.snippet,
         writePath = options.saveOutputIn,
         asyncLim = options.asyncLim,
+        forceSuccess=options.force,
         allOut = {}
     ;
 
     delete options.snippet; // remove grunt task options before passing to tenon module
     delete options.saveOutputIn;
     delete options.asyncLim;
+    delete options.force;
 
     function fmtFilename(file) {
       var lix = file.lastIndexOf('/');
@@ -38,7 +41,7 @@ module.exports = function(grunt) {
       }
       if (failed || err) {
         grunt.log.writeln(chalk.yellow('\nFiles with errors: ' + failed + '\n'));
-        done(false);
+        done(false||forceSuccess);
       } else {
         done(true);
       }
