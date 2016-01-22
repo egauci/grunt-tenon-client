@@ -1,6 +1,6 @@
 {
   "name": "grunt-tenon-client",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Grunt Plugin for Tenon Accessibility Testing API",
   "main": "src/tenon.js",
   "dependencies": {
