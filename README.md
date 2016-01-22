@@ -44,6 +44,7 @@ In addition to the API and client module options, there are these specific to th
 - snippet -- true or false (default false) to include errorSnippet in the console output.
 - saveOutputIn -- an (optional) path to a file that will receive all the results from the Tenon API. Default is no file output.
 - asyncLim -- the maximum number of files to test in parallel. Default is 1.
+- force -- report errors but don't fail the grunt task. Default is false.
 - config -- path to a JSON file containing options. Default is '.tenonrc' in the current working directory.
 The file is processed by the API module and can contain API and API Module parameters.
 This may be a good place to put your API key.
@@ -54,7 +55,8 @@ Here is a sample Gruntfile.js configuration:
       options: {
         key: 'your Tenon API key',
         filter: [31, 54],
-        level: 'AAA'
+        level: 'AAA',
+        force:false
       },
       all: {
         options: {
